@@ -1,3 +1,4 @@
+from jsonschema import ValidationError
 ''' Library to do requests '''
 
 def error(message):
@@ -12,6 +13,12 @@ def post(request, controller):
 
     # Retrieve data from request as a JSON
     data = request.get_json()
+
+    # Validates data passed in
+    try:
+        controller.validate(data)
+    except ValidationError:
+        return error("JSON Mapping Error")
 
     # Pass data into the handle 
     return controller.handle(data)

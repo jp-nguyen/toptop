@@ -5,7 +5,7 @@ import sys
 sys.path.append("./controllers")
 sys.path.append("./utils")
 
-import endpoint
+from endpoint import post
 from categories import CategoriesController
 from products import ProductsController
 
@@ -21,34 +21,14 @@ app = Flask(__name__)
 @app.route("/categories", methods = ["POST"])
 def categories():
     ''' Calls the Categories API and returns based on certain parameters '''
-    return endpoint.post(request, CategoriesController)
+    return post(request, CategoriesController)
 
 ##### PRODUCTS API #####
 
 @app.route("/products", methods = ["POST"])
 def products():
     ''' Calls the Products API and returns based on certain parameters '''
-    return endpoint.post(request, Products)
-    # Start of building the URL
-    url = PRODUCTS_PATH
-
-    # Receiving the JSON from the POST request
-    try:
-        data = request.get_json()
-        validate_categories_data(data)
-    except:
-        return error("Given invalid parameters")
-
-    # Adds the API key and the JSON format 
-    url += "?" + add_api_and_format("json")
-
-    print("Final URL:", url)
-
-    # Sends a GET request with the constructed url
-    response = requests.get(url)
-
-    # Returns the JSON object
-    return response.json()
+    return post(request, ProductsController)
 
 ##### MAIN #####
 

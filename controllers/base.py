@@ -6,6 +6,12 @@ class Controller(ABC):
 
     @staticmethod
     @abstractmethod
+    def validate(data):
+        ''' Validates data based on schema. Will raise ValidationError if invalid. '''
+        pass
+
+    @staticmethod
+    @abstractmethod
     def handle(data):
         ''' Takes in data and returns a JSON response. '''
         pass
