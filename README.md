@@ -29,7 +29,8 @@ TODO. Flask somehow.
 TODO.
 
 # Credits
-Frontend – Ashley Zhou, Ting Ting Huang, Dachelle Alo
-Backend – J.P. Nguyen, Rishi Shah
+**Frontend** – [Ashley Zhou](https://github.com/toomanyashleys), [Ting Ting Huang](https://github.com/TingTH), Dachelle Alo
+
+**Backend** – [J.P. Nguyen](https://github.com/jp-nguyen), [Rishi Shah](https://github.com/rishisshah)
 
 This was made for IN4MATX 151 at University of California, Irvine, during Fall Quarter 2019.
