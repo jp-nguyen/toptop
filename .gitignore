@@ -2,4 +2,4 @@
 .env
 
 # Virtual Environment
-venv
+venv/
