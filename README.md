@@ -23,7 +23,18 @@
 - **Usability.** The web application will have a user-friendly, aesthetic, and minimalist user interface to allow non-technical users to easily navigate and find suitable laptops and/or desktops. 
 
 # Installation
-TODO. Flask somehow.
+First, [install pip](https://pip.pypa.io/en/stable/installing/#upgrading-pip). Then do the following to run the backend in a virtual environment:
+
+```
+pip install -U pip                  # upgrades pip to latest
+pip install virtualenv              # installs virtual environment tool
+virtualenv venv                     # generates a virtual environment for Python
+source venv/bin/activate            # activates the virtual environment
+pip install -r requirements.txt     # installs Python dependencies
+python app.py                       # runs the Flask app
+```
+
+To deactivate the virtual environment, enter `deactivate`.
 
 # How to Use
 TODO.
