@@ -40,7 +40,7 @@ To deactivate the virtual environment, enter `deactivate`.
 TODO.
 
 # Credits
-**Frontend** – [Ashley Zhou](https://github.com/toomanyashleys), [Ting Ting Huang](https://github.com/TingTH), Dachelle Alo
+**Frontend** – [Ashley Zhou](https://github.com/toomanyashleys), [Ting Ting Huang](https://github.com/TingTH), [Dachelle Alo](https://github.com/dachellealo)
 
 **Backend** – [J.P. Nguyen](https://github.com/jp-nguyen), [Rishi Shah](https://github.com/rishisshah)
 
