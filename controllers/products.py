@@ -12,9 +12,23 @@ class ProductsController(Controller):
     def validate(data):
         ''' Validates data based on schema for products '''
 
-        # TODO; Prepare the schema for categories
+ 
         schema = {
-            "type" : "object"
+            "type" : "object",
+            "properties" : {
+                "desktop" : { "type" : "boolean" },
+                "laptop" : { "type" : "boolean" },
+                "minPrice" : { "type" : "number" },
+                "maxPrice" : { "type" : "number" },
+                "manufacturer" : { 
+                    "type" : "array",
+                    "items" : { "type" : "string" }
+                },
+                "features" : {
+                    "type" : "array",
+                    "items" : { "type" : "string" }
+                },
+            }
         }
 
         # Validate the data with schema
@@ -29,6 +43,14 @@ class ProductsController(Controller):
         url = bestbuy.PRODUCTS_PATH
 
         # TODO -- use data to build url
+        # TODO; Prepare the schema for products
+        #   output:
+        #       - image of computer
+        #       -`name
+        #       - rating
+        #       - price
+        #       - number of items
+        #       - ability to sort by
 
         # Adds the API key and the JSON format 
         url += "?" + bestbuy.add_api_and_format("json")
