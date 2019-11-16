@@ -14,6 +14,7 @@ class ProductsController(Controller):
 
     def validate(data):
         ''' Validates data based on schema for products '''
+        # Prepare the schema for products
         schema = {
             "type" : "object",
             "properties" : {

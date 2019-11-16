@@ -11,7 +11,6 @@ class CategoriesController(Controller):
 
     def validate(data):
         ''' Validates data based on schema for categories '''
-
         # Prepare the schema for categories
         schema = {
             "type" : "object",
