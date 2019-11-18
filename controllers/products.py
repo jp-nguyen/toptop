@@ -36,27 +36,77 @@ class ProductsController(Controller):
         # Validate the data with schema
         validate(data, schema)
 
-    def handle(data):
-        ''' Handles data and returns the response for categories '''
+    def urlBuilder(flag, keywords, manList, minPrice, maxPrice):
+
+        #The API returns a list of dictionaries. Here is one dictionary that is obtained by querying data["products"]
+
+    """{'bestSellingRank': None,
+                   'customerReviewAverage': None,
+                   'customerReviewCount': None,
+                   'description': None,
+                   'manufacturer': 'Apple',
+                   'name': 'Apple - Mac mini Desktop - Intel Core i7 - 16GB Memory '
+                           '- 128GB Solid State Drive - Space Gray',
+                   'salePrice': 1399.99,
+                   'shortDescription': 'Mac OS Mojave 10.14Technical details: 8th '
+                                       'Gen Intel&#174; Core&#8482; i7-8700B '
+                                       'processor; 16GB memory; 128GB solid state '
+                                       'driveSpecial features: built-in wireless '
+                                       'networking; Bluetooth; HDMI output',
+                   'thumbnailImage': 'https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6335/6335960_s.gif',
+                   'url': 'https://api.bestbuy.com/click/-/6335960/pdp'}"""
+
+        #I assume that flag is passed in as an int. 0 represents Laptop. 1 represents Desktop. 2 represents both.
+        if flag == 0:        
+            pcCode = "(categoryPath.id=abcat0502000))?"
+        elif flag == 1:
+            pcCode = "(categoryPath.id=abcat0501000))?"
+        else:
+            pcCode = "(categoryPath.id=abcat0501000|categoryPath.id=abcat0502000))?"
+        #I assume keywords is one string seperated by spaces, as shown in the mockup
+        keywords = keywords.split()
+        numKeywords = len(keywords)
+        customString = ""
+        if len(keywords) > 0:
+            customString = "("
+            for k in keywords:
+                customString += "search=" + k
+                numKeywords -= 1
+                if numKeywords > 0:
+                    customString += "|"
+            customString += ")"
+        if customString != "":
+            customString += "&"
+        #I assums manList is a list of strings of manufacturers
+        manString = ""
+        if len(manList)!=0:
+            numMan = len(manList)
+            manString = "("
+            for x in manList:
+                numMan -= 1
+                manString += "manufacturer=" + x
+                if numMan > 0:
+                    manString += "|"
+            manString += ")"
         
-        # Creating url
-        url = bestbuy.PRODUCTS_PATH
 
-        # TODO: go through data to add to the url
-
-        # Adds the question mark for query parameters
-        url += "?"
-
-        # Adds the output format
-        url += "&show=image,name,bestSellingRank,regularPrice"
+        url = "https://api.bestbuy.com/v1/products("
+        if len(customString) != 0:
+            url += customString
         
-        # Adds the API key and the JSON format 
-        url += bestbuy.add_api_and_format("json")
+        url += manString
+        url += "&salePrice>" + str(minPrice) + "&"
+        url += "salePrice<" + str(maxPrice)
 
-        print("Final URL:", url)
+        url += "&"
 
-        # Sends a GET request with the constructed url
+        url += pcCode
+        
+        url +=  "apiKey=E5at6CJJJDG7kfjwoDgEByJ4&sort=bestSellingRank.asc&"\
+                "show=bestSellingRank,customerReviewAverage,customerReviewCount,"\
+                "description,manufacturer,name,salePrice,shortDescription,thumbnailImage,url&format=json"
+        
         response = requests.get(url)
-
-        # Returns the JSON object
-        return response.json()
+        data = response.json()
+        return data
+    
