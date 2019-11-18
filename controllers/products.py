@@ -64,7 +64,6 @@ class ProductsController(Controller):
         else:
             pcCode = "(categoryPath.id=abcat0501000|categoryPath.id=abcat0502000))?"
         #I assume keywords is one string seperated by spaces, as shown in the mockup
-        keywords = keywords.split()
         numKeywords = len(keywords)
         customString = ""
         if len(keywords) > 0:
