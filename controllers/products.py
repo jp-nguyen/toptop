@@ -22,7 +22,7 @@ class ProductsController(Controller):
                 "laptop" : { "type" : "boolean" },
                 "minPrice" : { "type" : "number" },
                 "maxPrice" : { "type" : "number" },
-                "manufacturer" : { 
+                "manufacturers" : { 
                     "type" : "array",
                     "items" : { "type" : "string" }
                 },
@@ -36,34 +36,35 @@ class ProductsController(Controller):
         # Validate the data with schema
         validate(data, schema)
 
-    def urlBuilder(flag, keywords, manList, minPrice, maxPrice):
+    def handle(data):
 
         #The API returns a list of dictionaries. Here is one dictionary that is obtained by querying data["products"]
 
-    """{'bestSellingRank': None,
-                   'customerReviewAverage': None,
-                   'customerReviewCount': None,
-                   'description': None,
-                   'manufacturer': 'Apple',
-                   'name': 'Apple - Mac mini Desktop - Intel Core i7 - 16GB Memory '
-                           '- 128GB Solid State Drive - Space Gray',
-                   'salePrice': 1399.99,
-                   'shortDescription': 'Mac OS Mojave 10.14Technical details: 8th '
-                                       'Gen Intel&#174; Core&#8482; i7-8700B '
-                                       'processor; 16GB memory; 128GB solid state '
-                                       'driveSpecial features: built-in wireless '
-                                       'networking; Bluetooth; HDMI output',
-                   'thumbnailImage': 'https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6335/6335960_s.gif',
-                   'url': 'https://api.bestbuy.com/click/-/6335960/pdp'}"""
-
-        #I assume that flag is passed in as an int. 0 represents Laptop. 1 represents Desktop. 2 represents both.
-        if flag == 0:        
-            pcCode = "(categoryPath.id=abcat0502000))?"
-        elif flag == 1:
+##    """{'bestSellingRank': None,
+##                   'customerReviewAverage': None,
+##                   'customerReviewCount': None,
+##                   'description': None,
+##                   'manufacturer': 'Apple',
+##                   'name': 'Apple - Mac mini Desktop - Intel Core i7 - 16GB Memory '
+##                           '- 128GB Solid State Drive - Space Gray',
+##                   'salePrice': 1399.99,
+##                   'shortDescription': 'Mac OS Mojave 10.14Technical details: 8th '
+##                                       'Gen Intel&#174; Core&#8482; i7-8700B '
+##                                       'processor; 16GB memory; 128GB solid state '
+##                                       'driveSpecial features: built-in wireless '
+##                                       'networking; Bluetooth; HDMI output',
+##                   'thumbnailImage': 'https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6335/6335960_s.gif',
+##                   'url': 'https://api.bestbuy.com/click/-/6335960/pdp'}"""
+    
+        if data["desktop"] and data["laptop"]:
+            pcCode = "(categoryPath.id=abcat0501000|categoryPath.id=abcat0502000))?"
+        elif data["desktop"]:
             pcCode = "(categoryPath.id=abcat0501000))?"
         else:
-            pcCode = "(categoryPath.id=abcat0501000|categoryPath.id=abcat0502000))?"
+            pcCode = "(categoryPath.id=abcat0502000))?"
+        
         #I assume keywords is one string seperated by spaces, as shown in the mockup
+        keywords = data["features"]
         numKeywords = len(keywords)
         customString = ""
         if len(keywords) > 0:
@@ -77,6 +78,7 @@ class ProductsController(Controller):
         if customString != "":
             customString += "&"
         #I assums manList is a list of strings of manufacturers
+        manList = data["manufacturers"]
         manString = ""
         if len(manList)!=0:
             numMan = len(manList)
@@ -94,8 +96,8 @@ class ProductsController(Controller):
             url += customString
         
         url += manString
-        url += "&salePrice>" + str(minPrice) + "&"
-        url += "salePrice<" + str(maxPrice)
+        url += "&salePrice>" + str(data["minPrice"]) + "&"
+        url += "salePrice<" + str(data["maxPrice"])
 
         url += "&"
 
