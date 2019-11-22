@@ -17,6 +17,7 @@ class ProductsController(Controller):
         # Prepare the schema for products
         schema = {
             "type" : "object",
+            "required": ["desktop", "laptop", "minPrice", "maxPrice"],
             "properties" : {
                 "desktop" : { "type" : "boolean" },
                 "laptop" : { "type" : "boolean" },
@@ -35,79 +36,130 @@ class ProductsController(Controller):
 
         # Validate the data with schema
         validate(data, schema)
+ 
+    def get_categories(isDesktop, isLaptop):
+        ''' Returns a string to specify desktop and/or laptop '''
+        desktop_id = ProductsController.desktop_id
+        laptop_id = ProductsController.laptop_id
 
-    def handle(data):
-
-        #The API returns a list of dictionaries. Here is one dictionary that is obtained by querying data["products"]
-
-##    """{'bestSellingRank': None,
-##                   'customerReviewAverage': None,
-##                   'customerReviewCount': None,
-##                   'description': None,
-##                   'manufacturer': 'Apple',
-##                   'name': 'Apple - Mac mini Desktop - Intel Core i7 - 16GB Memory '
-##                           '- 128GB Solid State Drive - Space Gray',
-##                   'salePrice': 1399.99,
-##                   'shortDescription': 'Mac OS Mojave 10.14Technical details: 8th '
-##                                       'Gen Intel&#174; Core&#8482; i7-8700B '
-##                                       'processor; 16GB memory; 128GB solid state '
-##                                       'driveSpecial features: built-in wireless '
-##                                       'networking; Bluetooth; HDMI output',
-##                   'thumbnailImage': 'https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6335/6335960_s.gif',
-##                   'url': 'https://api.bestbuy.com/click/-/6335960/pdp'}"""
-    
-        if data["desktop"] and data["laptop"]:
-            pcCode = "(categoryPath.id=abcat0501000|categoryPath.id=abcat0502000))?"
-        elif data["desktop"]:
-            pcCode = "(categoryPath.id=abcat0501000))?"
+        attr = "("
+        if isDesktop and isLaptop:
+            attr += "categoryPath.id={}|categoryPath.id={}".format(desktop_id, laptop_id)
+        elif isDesktop:
+            attr += "categoryPath.id=" + desktop_id
         else:
-            pcCode = "(categoryPath.id=abcat0502000))?"
-        
-        #I assume keywords is one string seperated by spaces, as shown in the mockup
-        keywords = data["features"]
+            attr += "categoryPath.id=" + laptop_id
+        attr += ")"
+
+        return attr
+    
+    def get_features(keywords):
+        ''' Returns a string with all the features '''
+        attr = ""
         numKeywords = len(keywords)
-        customString = ""
-        if len(keywords) > 0:
-            customString = "("
+
+        if numKeywords > 0:
+            attr += "&("
+
             for k in keywords:
-                customString += "search=" + k
+                attr += "search=" + k
                 numKeywords -= 1
                 if numKeywords > 0:
-                    customString += "|"
-            customString += ")"
-        if customString != "":
-            customString += "&"
-        #I assums manList is a list of strings of manufacturers
-        manList = data["manufacturers"]
-        manString = ""
-        if len(manList)!=0:
-            numMan = len(manList)
-            manString = "("
-            for x in manList:
-                numMan -= 1
-                manString += "manufacturer=" + x
-                if numMan > 0:
-                    manString += "|"
-            manString += ")"
-        
+                    attr += "|"
 
-        url = "https://api.bestbuy.com/v1/products("
-        if len(customString) != 0:
-            url += customString
-        
-        url += manString
-        url += "&salePrice>" + str(data["minPrice"]) + "&"
-        url += "salePrice<" + str(data["maxPrice"])
+            attr += ")"
 
-        url += "&"
-
-        url += pcCode
-        
-        url +=  "apiKey=E5at6CJJJDG7kfjwoDgEByJ4&sort=bestSellingRank.asc&"\
-                "show=bestSellingRank,customerReviewAverage,customerReviewCount,"\
-                "description,manufacturer,name,salePrice,shortDescription,thumbnailImage,url&format=json"
-        
-        response = requests.get(url)
-        data = response.json()
-        return data
+        return attr
     
+    def get_manufacturers(manList):
+        ''' Returns a string with all the manufacturers '''
+        attr = ""
+        numMan = len(manList)
+
+        if numMan > 0:
+            attr = "&("
+
+            for m in manList:
+                attr += "manufacturer=" + m
+                numMan -= 1
+                if numMan > 0:
+                    attr += "|"
+
+            attr += ")"
+        
+        return attr
+    
+    def get_price_range(minPrice, maxPrice):
+        ''' Returns a string with the given price range inclusive '''
+        # Check the minimum price is a non-negative number
+        if minPrice < 0:
+            minPrice = 0
+
+        # Add the conditional for minimum price
+        attr = "&(salePrice>=" + str(minPrice)
+
+        # Add the conditional for maximum price only if the max is legitimate
+        if maxPrice >= minPrice:
+            attr += "&salePrice<=" + str(maxPrice)
+        
+        # Finish the attribute string
+        attr += ")"
+
+        # Return the string
+        return attr
+
+    def handle(data):
+        ''' Handles data and returns the response for categories '''
+
+        # Creating url
+        url = bestbuy.PRODUCTS_PATH
+
+        # Preparing for attributes
+        url += "("
+
+        # Get desktop and/or laptop
+        url += ProductsController.get_categories(data["desktop"], data["laptop"])
+        
+        # Get all the features specified (if any)
+        try:
+            url += ProductsController.get_features(data["features"])
+        except KeyError:
+            print("No additional keywords specified")
+
+        # Get all the manufacturers specified (if any)
+        try:
+            url += ProductsController.get_manufacturers(data["manufacturers"])
+        except KeyError:
+            print("No manufacturer specified")
+
+        # Get the price range (if set)
+        url += ProductsController.get_price_range(data["minPrice"], data["maxPrice"])
+        
+        # Finishing attributes
+        url += ")"
+
+        # Adds the output format
+        attrs = [
+            "bestSellingRank",
+            "customerReviewAverage",
+            "customerReviewCount",
+            "description",
+            "manufacturer",
+            "name",
+            "salePrice",
+            "shortDescription",
+            "thumbnailImage",
+            "url"
+        ]
+
+        url += bestbuy.add_output_format(attrs)
+
+        # Adds the API key and the JSON format 
+        url += bestbuy.add_api_and_format("json")
+
+        print("Final URL:", url)
+        # Sends a GET request with the constructed url
+        response = requests.get(url)
+
+        # Returns the JSON object
+        return response.json()
