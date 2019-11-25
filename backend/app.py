@@ -1,4 +1,5 @@
 from flask import request, Flask
+from flask_cors import CORS
 import json
 import sys
 
@@ -15,6 +16,7 @@ from products import ProductsController
     will be utilizing the Best Buy API to do so.
 '''
 app = Flask(__name__)
+CORS(app)
 
 ##### CATEGORIES API #####
 
