@@ -13,3 +13,7 @@ PRODUCTS_PATH   = "https://api.bestbuy.com/v1/products"
 def add_api_and_format(form):
     ''' Returns a string with the API key and specified form '''
     return "&apiKey=" + API_KEY + "&format=" + form
+
+def add_output_format(attrs):
+    ''' Returns a string for the format of the JSON output given a list '''
+    return "&show=" + ','.join(attrs)
