@@ -1,0 +1,51 @@
+.landing-desc {
+  width: 600px;
+  float: left;
+  margin: 8%;
+  padding: 10px;
+}
+
+.landing-logo {
+}
+
+.landing-header {
+  font-size: 60px;
+  margin-bottom: 20px;
+}
+
+.landing-description {
+  font-size: 25px;
+  margin-bottom: 40px;
+}
+
+.logo {
+  width: 150px;
+  height: 250px;
+}
+
+.visitBtn {
+  background-color: #bc75f9;
+  border: #bc75f9;
+  font-size: 25px;
+  border-radius: 40px;
+  color: white;
+  padding: 16px 35px;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.credit,
+.team-name {
+  margin-bottom: 20px;
+}
+
+.credit {
+  margin-top: 30px;
+  font-weight: 100;
+  letter-spacing: 3px;
+}
+.team-name {
+  text-transform: uppercase;
+  letter-spacing: 6px;
+  font-weight: 900;
+  font-size: 30px;
+}
