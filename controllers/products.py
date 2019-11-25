@@ -116,6 +116,8 @@ class ProductsController(Controller):
 
         # Preparing for attributes
         url += "("
+<<<<<<< HEAD
+=======
 
         # Get desktop and/or laptop
         url += ProductsController.get_categories(data["desktop"], data["laptop"])
@@ -134,6 +136,46 @@ class ProductsController(Controller):
 
         # Get the price range (if set)
         url += ProductsController.get_price_range(data["minPrice"], data["maxPrice"])
+        
+        # Finishing attributes
+        url += ")"
+>>>>>>> 70748f875a53de11f6f3d5593ceb333a0e4902d1
+
+        # Get desktop and/or laptop
+        url += ProductsController.get_categories(data["desktop"], data["laptop"])
+        
+        # Get all the features specified (if any)
+        try:
+            url += ProductsController.get_features(data["features"])
+        except KeyError:
+            print("No additional keywords specified")
+
+<<<<<<< HEAD
+        # Get all the manufacturers specified (if any)
+        try:
+            url += ProductsController.get_manufacturers(data["manufacturers"])
+        except KeyError:
+            print("No manufacturer specified")
+
+        # Get the price range (if set)
+        url += ProductsController.get_price_range(data["minPrice"], data["maxPrice"])
+=======
+        # Adds the output format
+        attrs = [
+            "bestSellingRank",
+            "customerReviewAverage",
+            "customerReviewCount",
+            "description",
+            "manufacturer",
+            "name",
+            "salePrice",
+            "shortDescription",
+            "thumbnailImage",
+            "url"
+        ]
+
+        url += bestbuy.add_output_format(attrs)
+>>>>>>> 70748f875a53de11f6f3d5593ceb333a0e4902d1
         
         # Finishing attributes
         url += ")"
@@ -163,3 +205,4 @@ class ProductsController(Controller):
 
         # Returns the JSON object
         return response.json()
+
