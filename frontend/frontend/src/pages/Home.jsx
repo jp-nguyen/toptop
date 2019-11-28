@@ -4,9 +4,17 @@ import { NavLink } from "react-router-dom";
 import logo from "../assets/logo.png";
 import "../css/home.css";
 
+/**
+ * The Home page introduces the user to the product and presents a button that
+ * leads to the Carousel page for features.
+ */
 class Home extends Component {
   state = {};
 
+  /**
+   * Renders the Home page, which contains descriptions and logos of our
+   * product along with a button that links them to the Carousel page.
+   */
   render() {
     return (
       <div>
@@ -16,7 +24,7 @@ class Home extends Component {
             Transforming the computer search experience with an intuitive and
             user-friendly website to find your next laptop or desktop.
           </p>
-          <NavLink to="/category">
+          <NavLink to="/carousel">
             <div className="visitBtn"> 
               Visit
             </div>

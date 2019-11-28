@@ -1,0 +1,10 @@
+.computer-type {
+    text-align: center;
+}
+
+.laptop-icon, .desktop-icon {
+    margin: 0px 20px 50px;
+    width: 250px;
+    border: 1px transparent;
+    border-radius: 16.5px
+}

@@ -22,25 +22,11 @@
 - **Scalability.** The web application must be available 24 hours a day, 7 days a week, with two hours dedicated per week to maintain the system. 
 - **Usability.** The web application will have a user-friendly, aesthetic, and minimalist user interface to allow non-technical users to easily navigate and find suitable laptops and/or desktops. 
 
-# Installation
-First, [install pip](https://pip.pypa.io/en/stable/installing/#upgrading-pip). Then do the following to run the backend in a virtual environment:
-
-```
-pip install -U pip                  # upgrades pip to latest
-pip install virtualenv              # installs virtual environment tool
-virtualenv venv                     # generates a virtual environment for Python
-source venv/bin/activate            # activates the virtual environment
-pip install -r requirements.txt     # installs Python dependencies
-python app.py                       # runs the Flask app
-```
-
-To deactivate the virtual environment, enter `deactivate`.
-
-# How to Use
-TODO.
+# Resources
+- [React Animations between Views](https://css-tricks.com/animating-between-views-in-react/)
 
 # Credits
-**Frontend** – [Ashley Zhou](https://github.com/toomanyashleys), [Ting Ting Huang](https://github.com/TingTH), [Dachelle Alo](https://github.com/dachellealo)
+**Frontend** – [Ashley Zhou](https://github.com/toomanyashleys), [Ting Ting Huang](https://github.com/TingTH), [Dachelle Alo](https://github.com/dachellealo), [J.P. Nguyen](https://github.com/jp-nguyen)
 
 **Backend** – [J.P. Nguyen](https://github.com/jp-nguyen), [Rishi Shah](https://github.com/rishisshah)
 
