@@ -37,12 +37,19 @@ class Results extends Component {
    * Renders the results received from the call.
    */
   render() {
-    // Make a call to the backend, and get back data.
-    const data = Socket.POST(this.payload)
+    var results = [];
+
+    // Make a call to the backend, and get data.
+    Socket.POST(this.payload)
       .then(response => {
         console.log("SUCCESS");
-        console.log(response);
-        return response;
+        console.log(response.products);
+
+        const data = response.products;
+        for (var i = 0; i < data.length; ++i) {
+          results.push(i);
+        }
+
       })
       .catch(error => {
         console.log("ERROR");
@@ -52,7 +59,9 @@ class Results extends Component {
     return (
       <div>
         <div>
-          <h1>{`${data}`}</h1>
+          {results.map((num) => 
+            <div>{num} lmao</div>
+          )}
           <Arrow direction="left" clickFunction={this.goToHome} />
         </div>
       </div>

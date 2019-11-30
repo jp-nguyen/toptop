@@ -24,6 +24,7 @@
 
 # Resources
 - [React Animations between Views](https://css-tricks.com/animating-between-views-in-react/)
+- [React Usage with Axios](https://designrevision.com/react-axios/)
 
 # Credits
 **Frontend** – [Ashley Zhou](https://github.com/toomanyashleys), [Ting Ting Huang](https://github.com/TingTH), [Dachelle Alo](https://github.com/dachellealo), [J.P. Nguyen](https://github.com/jp-nguyen)

@@ -136,7 +136,7 @@ class ProductsController(Controller):
         url += ProductsController.get_price_range(data["minPrice"], data["maxPrice"])
         
         # Finishing attributes
-        url += ")"
+        url += ")?"
 
         # Adds the output format
         attrs = [
