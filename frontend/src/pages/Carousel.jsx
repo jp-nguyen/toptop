@@ -33,11 +33,13 @@ const slides = [
     instructions: "Select zero, one, or more options",
     options: Manufacturers
   },
+  /* Ignoring the features selection
   {
     title: "What other features are you looking for?",
     instructions: "Enter your desired features in the search bar",
     options: Features
   }
+  */
 ];
 
 /**

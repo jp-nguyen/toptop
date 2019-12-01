@@ -28,7 +28,7 @@ class Price extends Component {
   changePrice = ({ target }) => {
     const { name, value } = target;
     // Invoke the handler
-    this.handler(name, value);
+    this.handler(name, parseInt(value, 10));
   };
 
 

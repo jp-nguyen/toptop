@@ -10,6 +10,8 @@ const client = Axios.create({
 });
 
 async function POST(data) {
+    console.log("Sending data:");
+    console.log(data);
     return client({
         method: "post",
         url: endpoint,

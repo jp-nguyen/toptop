@@ -10,7 +10,7 @@ import "../css/common.css";
 class Brand extends Component {
     /**
      * Constructs a Brand component. Also keeps the name and the clickFunction
-     * @param {'Const'} props 
+     * @param {'*'} props 
      */
     constructor(props) {
         super(props);

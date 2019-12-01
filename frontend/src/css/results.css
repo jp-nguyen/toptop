@@ -1,0 +1,50 @@
+.results {
+  position: absolute;
+  padding: 0;
+  margin: 0;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.results > * {
+  background-color: grey;
+  color: black;
+}
+
+.results-header {
+  display: flex;
+  align-items: center;
+}
+
+.fill {
+    width: 25%
+}
+
+.clearfix {
+  clear: both;
+}
+
+.clearfix:after {
+  clear: both;
+  content: "";
+  display: table;
+}
+
+.result-container {
+  display: flex;
+  border: 1px solid black;
+}
+
+.result-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.result-text {
+  display: inline;
+  font-size: 30px;
+}
+
+

@@ -87,8 +87,6 @@ class Manufacturers extends Component {
    * brand. Whichever is chosen will have a green border surrounding it.
    */
   render() {
-
-    console.log(this.state.manufacturers);
     return (
       <div>
         <div className="grid-container">
