@@ -22,9 +22,15 @@ class Price extends Component {
     }
   }
  
-  // TODO -- add the functions to change price mins and maxs
+  /**
+   * Updates the given price.
+   */
+  changePrice = ({ target }) => {
+    const { name, value } = target;
+    // Invoke the handler
+    this.handler(name, value);
+  };
 
-  // TODO -- change the inputs to be based on number!
 
   /**
    * Renders the options for Price, which should consist of choosing the
@@ -34,8 +40,18 @@ class Price extends Component {
   render() {
     return (
     <div className="input-box"> 
-        <input className="price" id="minimum" type="text" name="minimum" placeholder="$"/>
-        <input className="price" id="maximum" type="text" name="maximum" placeholder="$$$"/>
+        <input 
+          className="input price" 
+          type="text" 
+          name="minPrice" 
+          placeholder="$"
+          onChange={this.changePrice}/>
+        <input 
+          className="price" 
+          type="text" 
+          name="maxPrice" 
+          placeholder="$$$"
+          onChange={this.changePrice}/>
     </div>
     );
   }

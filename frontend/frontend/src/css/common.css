@@ -1,3 +1,5 @@
+* {box-sizing:border-box;}
+
 header {
     text-align: center;
     padding: 3% 5% 3%;    
@@ -90,4 +92,15 @@ header {
 
 .chosen {
     box-shadow: 0 0 0 5px #87F975;
+}
+
+.slide-container {
+    width: 100%;
+    text-align: center;
+}
+
+.slide {
+    width: 80%;
+    height: 500px;
+    border: 5px #FFFFFF;
 }

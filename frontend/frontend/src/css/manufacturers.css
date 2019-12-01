@@ -1,0 +1,30 @@
+.grid-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    align-content: space-between;
+    justify-content: space-around;
+}
+
+.brand {
+    width: 160px;
+    height: 160px;
+    text-align: center;
+    margin: 10px;
+    padding: 5px;
+    border: 1px transparent;
+    border-radius: 16.5px
+}
+
+.brand > .helper {
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}
+
+.brand > img {
+    max-height: 150px;
+    max-width: 150px;
+    vertical-align: middle;
+}

@@ -71,11 +71,42 @@ class Carousel extends Component {
    * Updates a given field inside the payload.
    */
   updatePayload = (name, value) => {
-    this.setState({
+    // Set the state with a function, forcing React to queue the change instead
+    // of batching all the changes.
+    this.setState(state => ({
       payload: {
-        ...this.state.payload,
+        ...state.payload,
         [name]: value
       }
+    }));
+  };
+
+  /**
+   * Updates a given field inside the payload that is an array.
+   */
+  updateArrayInPayload = (name, value) => {
+    // Set the state with a function, forcing React to queue the change instead
+    // of batching all the changes.
+    this.setState(state => {
+      // Get the old array.
+      const oldArray = [
+        ...(name === "manufacturers"
+          ? state.payload.manufacturers
+          : state.payload.features)
+      ];
+      
+      // Create a new array that either includes or removes the value.
+      const newArray = oldArray.includes(value)
+        ? oldArray.filter(i => i !== value)
+        : oldArray.concat([value]);
+
+      // Update the payload with the new array.
+      return {
+        payload: {
+          ...state.payload,
+          [name]: newArray
+        }
+      };
     });
   };
 
@@ -115,7 +146,7 @@ class Carousel extends Component {
    */
   goToResults = () => {
     this.props.history.push("/results", this.state.payload);
-  }
+  };
 
   /**
    * Renders the Carousel, which has all the slides that the users will interact
@@ -124,17 +155,23 @@ class Carousel extends Component {
   render() {
     // Get the index
     const index = this.state.activeIndex;
+
+    // Get the slide information
     const { title, instructions, options } = slides[index];
 
     // Return the component
     return (
-      <div>
+      <div className="container">
         <Slide
           title={title}
           instructions={instructions}
           options={options}
           payload={this.state.payload}
-          handler={this.updatePayload}
+          handler={
+            options === Manufacturers || options === Features
+              ? this.updateArrayInPayload
+              : this.updatePayload
+          }
         />
         <ProgressBar
           history={this.props.history}
