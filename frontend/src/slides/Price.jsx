@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
 import "../css/common.css";
+import "../css/price.css";
 
 /**
  * Price is a slide where the user can choose if they want to find a desktop

@@ -1,11 +1,13 @@
 .landing-desc {
   width: 600px;
   float: left;
-  margin: 8%;
+  margin: 10%;
   padding: 10px;
 }
 
 .landing-logo {
+  margin-left: 70%; 
+  padding: 10px;
 }
 
 .landing-header {
@@ -19,14 +21,18 @@
 }
 
 .logo {
-  width: 150px;
-  height: 250px;
+  max-width: 150px;
+  height: auto;
+  padding-top: 30%;
 }
 
 .visitBtn {
   background-color: #bc75f9;
   border: #bc75f9;
   font-size: 25px;
+  font-weight: bold;
+  text-align: center;
+  width: 150px;
   border-radius: 40px;
   color: white;
   padding: 16px 35px;
@@ -48,4 +54,8 @@
   letter-spacing: 6px;
   font-weight: 900;
   font-size: 30px;
+}
+
+.nav-link {
+  text-decoration: none;
 }

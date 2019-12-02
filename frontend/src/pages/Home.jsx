@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { NavLink } from "react-router-dom";
+//import { NavLink } from "react-router-dom";
 
 import logo from "../assets/logo.png";
 import "../css/home.css";
@@ -24,11 +24,11 @@ class Home extends Component {
             Transforming the computer search experience with an intuitive and
             user-friendly website to find your next laptop or desktop.
           </p>
-          <NavLink to="/carousel">
+          <a href="/carousel" className="nav-link">
             <div className="visitBtn"> 
               Visit
             </div>
-          </NavLink>
+          </a>
         </div>
         <div className="landing-logo">
           <img className="logo" src={logo} alt="Half Stack Logo" />
