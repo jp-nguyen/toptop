@@ -4,13 +4,13 @@
     text-align: center;
 }
 
-.input.price {
+input.input.price {
     padding: 10px;
     margin: 60px 20px 20px 20px;
     vertical-align: middle;
 }
 
-.price {
+input.price {
     padding: 10px;
     margin: 60px 20px 20px 20px;
     vertical-align: middle;

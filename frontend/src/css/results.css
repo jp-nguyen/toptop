@@ -9,13 +9,19 @@
 }
 
 .results > * {
-  background-color: grey;
+  background-color: white;
   color: black;
 }
 
 .results-header {
   display: flex;
   align-items: center;
+  margin: auto;
+  text-align: center;
+}
+
+.leftarrow-results {
+  background-color: black;
 }
 
 .fill {
@@ -33,18 +39,34 @@
 }
 
 .result-container {
+  padding: 10px;
   display: flex;
+  justify-content: space-between;
   border: 1px solid black;
 }
 
 .result-link {
+  width: 100%;
   text-decoration: none;
   color: inherit;
 }
 
 .result-text {
-  display: inline;
-  font-size: 30px;
+  display: inline-block;
+  text-align: right;
+  font-size: 12pt;
+}
+
+.result-text.name {
+
+}
+
+.result-text.review {
+
+}
+
+.result-text.price {
+
 }
 
 

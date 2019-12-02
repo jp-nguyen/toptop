@@ -63,8 +63,12 @@ class Results extends Component {
     return (
       <div className="results">
           <div className="results-header clearfix">
-            <Arrow direction="left" clickFunction={this.goToHome} />
-            <h1>Results</h1>
+            <div class="leftarrow-results">
+              <Arrow direction="left" clickFunction={this.goToHome} />
+            </div>
+            <div class="results-header">
+              <h1>Results</h1>
+            </div>
           </div>
           <ul>
             {results.map((value, index) => (
