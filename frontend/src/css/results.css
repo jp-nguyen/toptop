@@ -53,20 +53,23 @@
 
 .result-text {
   display: inline-block;
-  text-align: right;
   font-size: 12pt;
 }
 
 .result-text.name {
-
+  margin-left: 20px;
+  padding: 10px 15px 15px 10px;
 }
 
 .result-text.review {
-
+  position: absolute;
+  right: 10%;
+  padding: 10px 15px 0px 10px;
 }
 
 .result-text.price {
-
+  float: right;
+  padding: 10px 15px 0px 10px;
 }
 
 
