@@ -15,7 +15,7 @@ const Dots = ({ count, active }) => {
   }
 
   // Return the rendered dots
-  return (<ul className="progressbar">{dots}</ul>);
+  return (<ul className="dots">{dots}</ul>);
 };
 
 export default Dots;

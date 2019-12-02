@@ -27,7 +27,7 @@ class ProgressBar extends Component {
   render() {
     const { count, active, leftClick, rightClick, goToResults } = this.props;
     return (
-      <div>
+      <div className="progress-bar">
         <Arrow
           direction="left"
           clickFunction={ active > 0 ? leftClick : this.goToHome }
