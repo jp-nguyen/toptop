@@ -62,19 +62,21 @@ class Results extends Component {
     // Render the results
     return (
       <div className="results">
-          <div className="results-header clearfix">
-            <div class="leftarrow-results">
-              <Arrow direction="left" clickFunction={this.goToHome} />
-            </div>
-            <div class="results-header">
-              <h1>Results</h1>
-            </div>
+        <div className="results-header clearfix">
+          <div className="leftarrow-results">
+            <Arrow direction="left" clickFunction={this.goToHome} />
           </div>
+          <div className="results-header">
+            <h1>Results</h1>
+          </div>
+        </div>
+        <div className="results-body">
           <ul>
             {results.map((value, index) => (
-              <Result key={index} value={value}/>
+              <Result key={index} value={value} />
             ))}
           </ul>
+        </div>
       </div>
     );
   }
