@@ -96,11 +96,11 @@ header {
 
 .slide-container {
     width: 100%;
-    text-align: center;
+    padding: 5px;
 }
 
 .slide {
-    width: 80%;
+    width: 100%;
     height: 500px;
     border: 5px #FFFFFF;
 }
